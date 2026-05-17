@@ -1,4 +1,6 @@
 using APBD_9.Data;
+using APBD_9.Repositories;
+using APBD_9.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>();
 
-var app = builder.Build();
+builder.Services.AddScoped<IPcRepository, PcRepository>();
 
+builder.Services.AddScoped<IPcService, PcService>();
+
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
